@@ -3,4 +3,4 @@ this is a program that helps the client to manage his different budgets for dife
 
 THERE ARE MANY MISSING FUNCTIONS.
 
-Functions made: Constructor, spend, add, toString.
+Functions made: Constructor, spend, add, defineMin, defineMax & toString.
