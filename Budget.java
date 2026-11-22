@@ -21,14 +21,12 @@ public class Budget {
         }
         moneyLeft -= m;
         tList.add(new Transaction(m, description, date, false));
-        System.out.println(this.toString());
     }
 
     public void add(double m, String description, Date date) {
         if (underMax(m)) {
             moneyLeft += m;
             tList.add(new Transaction(m, description, date, true));
-            System.out.println(this.toString());
         } else {
             System.out.println("Cannot add money. Exceeds maximum limit.");
         }
