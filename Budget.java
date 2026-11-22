@@ -1,6 +1,7 @@
 public class Budget {
     private final double initial;
     private double moneyLeft;
+    private double min, max;
 
     public Budget(double initial) {
         this.initial = initial;
@@ -15,6 +16,14 @@ public class Budget {
     public void add(double m, String description) {
         moneyLeft += m;
         System.out.println(this.toString());
+    }
+
+    public void defineMax(double max) {
+        this.max = max;
+    }
+
+    public void defineMin(double min) {
+        this.min = min;
     }
 
     @Override
