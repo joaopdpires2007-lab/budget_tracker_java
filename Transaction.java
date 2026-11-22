@@ -1,24 +1,31 @@
-import java.util.Date;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.time.LocalDate;
 
-/**
- * val -> the value of the transaction
- * description -> the description of the transaction
- * date -> the date of the transaction
- * positive -> if its spending (==false) if its earning (==true)
- * 
- */
-public class Transaction {
-    public double val;
-    public String description;
-    public Date date;
-    public boolean positive;
+public record Transaction(Type type, BigDecimal amount, String description, LocalDate date) {
 
-    public Transaction(double val, String d, Date date, boolean p) {
-        this.val = val;
-        description = d;
-        this.date = date;
-        positive = p;
+    public enum Type { SPEND, ADD }
+
+    public Transaction {
+        if (type == null || date == null) {
+            throw new IllegalArgumentException("O tipo e a data são obrigatórios.");
+        }
+        if (amount == null) {
+            throw new IllegalArgumentException("O valor é obrigatório.");
+        }
+        amount = amount.setScale(2, RoundingMode.HALF_UP);
+        if (amount.signum() <= 0) {
+            throw new IllegalArgumentException("O valor tem de ser positivo.");
+        }
+        description = (description == null) ? "" : description.trim();
+    }
+
+    public BigDecimal signedAmount() {
+        return type == Type.ADD ? amount : amount.negate();
+    }
+
+    @Override
+    public String toString() {
+        return date + " | " + type + " | " + amount + " | " + description;
     }
 }
-
-
