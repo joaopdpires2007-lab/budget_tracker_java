@@ -2,10 +2,12 @@ public class Budget {
     private final double initial;
     private double moneyLeft;
     private double min, max;
+    private String name;
 
-    public Budget(double initial) {
+    public Budget(double initial, String name) {
         this.initial = initial;
         moneyLeft = initial;
+        this.name = name;
     }
 
     public void spend(double m, String description) {
@@ -26,8 +28,12 @@ public class Budget {
         this.min = min;
     }
 
+    public void changeName(String newName) {
+        this.name = newName;
+    }
+
     @Override
     public String toString() {
-        return "Initial money: " + initial + "\nMoney left: " + moneyLeft;
+        return "Budget name: " + name + "\nInitial money: " + initial + "\nMoney left: " + moneyLeft;
     }
 }
